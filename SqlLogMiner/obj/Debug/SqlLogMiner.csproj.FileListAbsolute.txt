@@ -1,0 +1,1 @@
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\SqlLogMiner.exe.config
