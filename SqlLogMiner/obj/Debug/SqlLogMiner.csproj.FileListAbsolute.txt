@@ -1,1 +1,17 @@
 c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\SqlLogMiner.exe.config
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\SqlLogMiner.exe
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\SqlLogMiner.pdb
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.csprojResolveAssemblyReference.cache
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\MainWindow.baml
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\MainWindow.g.cs
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\App.g.cs
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner_MarkupCompile.cache
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.g.resources
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.Properties.Resources.resources
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.csproj.GenerateResource.Cache
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.exe
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\SqlLogMiner.pdb
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Fluent.dll
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\System.Windows.Interactivity.dll
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Fluent.pdb
+c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Fluent.xml
