@@ -66,6 +66,9 @@
     <Compile Include="Views\NewConnection\ConnectDatabase.xaml.cs">
       <DependentUpon>ConnectDatabase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewConnection\FilterSetup.xaml.cs">
+      <DependentUpon>FilterSetup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewConnection\LogSelection.xaml.cs">
       <DependentUpon>LogSelection.xaml</DependentUpon>
     </Compile>
@@ -82,6 +85,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\NewConnection\ConnectDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewConnection\FilterSetup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

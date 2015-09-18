@@ -31,9 +31,10 @@ namespace SqlLogMiner.Views.NewConnection
 
         private void Next(object sender, RoutedEventArgs e)
         {
+            this.Close();
             LogSelection logSelectionWindow = new LogSelection();
             logSelectionWindow.ShowDialog();
-            this.Close();
+            
         }
     }
 }
