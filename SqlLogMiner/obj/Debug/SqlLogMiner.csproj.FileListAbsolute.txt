@@ -21,3 +21,5 @@ C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bi
 C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Microsoft.Windows.Shell.xml
 C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\RibbonControlsLibrary.pdb
 C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\RibbonControlsLibrary.xml
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\Views\NewConnection\ConnectDatabase.baml
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\obj\Debug\Views\NewConnection\ConnectDatabase.g.cs

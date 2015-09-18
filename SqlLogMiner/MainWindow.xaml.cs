@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using SqlLogMiner.Views.NewConnection;
 
 namespace SqlLogMiner
 {
@@ -31,7 +32,8 @@ namespace SqlLogMiner
 
         private void New(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            ConnectDatabase connectDatabase = new ConnectDatabase();
+            connectDatabase.ShowDialog();
         }
 
         private void Open(object sender, RoutedEventArgs e)
