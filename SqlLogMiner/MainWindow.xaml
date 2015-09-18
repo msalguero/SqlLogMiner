@@ -1,7 +1,30 @@
-﻿
-<Window x:Class="SqlLogMiner.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="SqlLogMiner.MainWindow"
         Title="SQL Log Miner" Height="700" Width="1300" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
-    <Grid/>
+    <Grid>
+        <Custom:Ribbon HorizontalAlignment="Left" VerticalAlignment="Top" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}">
+            <Custom:RibbonTab Header="Home">
+                <Custom:RibbonGroup Header="Session">
+                    <Custom:RibbonButton LargeImageSource="Images\new.png" Label="New" KeyTip="X" />
+                    <Custom:RibbonButton LargeImageSource="Images\open.png" Label="Open" KeyTip="C" />
+                    <Custom:RibbonButton LargeImageSource="Images\sessionSettings.png" Label="Session Settings" KeyTip="FP" />
+                    <Custom:RibbonMenuButton LargeImageSource="Images\save.png" Label="Save" KeyTip="V">
+                        <Custom:RibbonMenuItem ImageSource="Images\saveAs.png" Header="Save as" KeyTip="T"/>
+                    </Custom:RibbonMenuButton>
+                </Custom:RibbonGroup>
+                <Custom:RibbonGroup Header="Actions">
+    
+                </Custom:RibbonGroup>
+                <Custom:RibbonGroup Header="Results">
+
+                </Custom:RibbonGroup>
+            </Custom:RibbonTab>
+            <Custom:RibbonTab Header="View">
+            </Custom:RibbonTab>
+            <Custom:RibbonTab Header="Resources">
+            </Custom:RibbonTab>
+        </Custom:Ribbon>
+    </Grid>
 </Window>

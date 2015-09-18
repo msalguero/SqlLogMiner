@@ -15,3 +15,9 @@ c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bi
 c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\System.Windows.Interactivity.dll
 c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Fluent.pdb
 c:\users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Fluent.xml
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\bin\Debug\RibbonControlsLibrary.xml
