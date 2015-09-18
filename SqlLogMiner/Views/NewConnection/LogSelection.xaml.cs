@@ -11,15 +11,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace SqlLogMiner.Views.NewConnection
 {
     /// <summary>
-    /// Interaction logic for ConnectDatabase.xaml
+    /// Interaction logic for LogSelection.xaml
     /// </summary>
-    public partial class ConnectDatabase : Window
+    public partial class LogSelection : Window
     {
-        public ConnectDatabase()
+        public LogSelection()
         {
             InitializeComponent();
         }
@@ -29,10 +30,19 @@ namespace SqlLogMiner.Views.NewConnection
             this.Close();
         }
 
-        private void Next(object sender, RoutedEventArgs e)
+        private void Add(object sender, RoutedEventArgs e)
         {
-            LogSelection logSelectionWindow = new LogSelection();
-            logSelectionWindow.ShowDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void Previous(object sender, RoutedEventArgs e)
+        {
+            ConnectDatabase connectDatabase = new ConnectDatabase();
+            connectDatabase.ShowDialog();
             this.Close();
         }
     }

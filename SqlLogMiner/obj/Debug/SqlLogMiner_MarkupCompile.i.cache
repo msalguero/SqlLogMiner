@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\App.xaml
-2-499429555
+31648003905
 
-10666789185
+11899492579
 18-1024915309
-MainWindow.xaml;Views\NewConnection\ConnectDatabase.xaml;
+MainWindow.xaml;Views\NewConnection\ConnectDatabase.xaml;Views\NewConnection\LogSelection.xaml;
 
 False
 

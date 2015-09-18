@@ -66,6 +66,9 @@
     <Compile Include="Views\NewConnection\ConnectDatabase.xaml.cs">
       <DependentUpon>ConnectDatabase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewConnection\LogSelection.xaml.cs">
+      <DependentUpon>LogSelection.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +82,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\NewConnection\ConnectDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewConnection\LogSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\saveSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_log.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

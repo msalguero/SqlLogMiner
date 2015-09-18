@@ -19,7 +19,7 @@
         <TextBox Name="PasswordTextBox" HorizontalAlignment="Left" Height="24" Margin="240,274,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
         <TextBox Name="DatabasTextBox" HorizontalAlignment="Left" Height="22" Margin="240,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
         <Grid HorizontalAlignment="Left" Height="50" Margin="0,546,0,0" VerticalAlignment="Top" Width="696" Background="#FFD6D6D6">
-            <Button Content="Next" HorizontalAlignment="Left" Margin="518,20,0,0" VerticalAlignment="Top" Width="76" Background="White"/>
+            <Button Click="Next" Content="Next" HorizontalAlignment="Left" Margin="518,20,0,0" VerticalAlignment="Top" Width="76" Background="White"/>
             <Button Content="Cancel" HorizontalAlignment="Left" Margin="611,20,0,0" VerticalAlignment="Top" Width="75" Background="White"/>
         </Grid>
     </Grid>
