@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SqlLogMiner.Entities
 {
+    [Serializable]
     public class Session
     {
         public string ServerName { get; set; }

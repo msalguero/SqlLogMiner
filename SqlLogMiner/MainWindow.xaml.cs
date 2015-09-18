@@ -46,7 +46,7 @@ namespace SqlLogMiner
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                
+                CurrentSession = FileManager.DeSerializeObject<Session>(openFileDialog.FileName);
             }
         }
 
@@ -54,6 +54,10 @@ namespace SqlLogMiner
         {
             if(SavePath == "")
                 SaveAs(sender, e);
+            else
+            {
+                FileManager.SerializeObject(CurrentSession, SavePath);
+            }
         }
 
         private void SaveAs(object sender, RoutedEventArgs e)
@@ -62,6 +66,7 @@ namespace SqlLogMiner
             if (saveFileDialog.ShowDialog() == true)
             {
                 SavePath = saveFileDialog.FileName;
+                FileManager.SerializeObject<Session>(CurrentSession, SavePath);
             }
         }
     }
