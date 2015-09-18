@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using SqlLogMiner.Entities;
 
 namespace SqlLogMiner.Views.NewConnection
 {
@@ -20,9 +21,12 @@ namespace SqlLogMiner.Views.NewConnection
     /// </summary>
     public partial class LogSelection : Window
     {
-        public LogSelection()
+        public Session NewSession;
+        public LogSelection(Session newSession)
         {
             InitializeComponent();
+            NewSession = newSession;
+            DataContext = NewSession;
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -35,7 +39,7 @@ namespace SqlLogMiner.Views.NewConnection
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-
+                LogsListBox.Items.Add(openFileDialog.SafeFileName);
             }
         }
 
@@ -48,9 +52,11 @@ namespace SqlLogMiner.Views.NewConnection
 
         private void Next(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            FilterSetup filterSetupWindow = new FilterSetup();
-            filterSetupWindow.ShowDialog();
+            FilterSetup filterSetupWindow = new FilterSetup(NewSession);
+            if (filterSetupWindow.ShowDialog() == true)
+            {
+                DialogResult = true;
+            }
         }
     }
 }

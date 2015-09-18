@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SqlLogMiner.Entities;
 
 namespace SqlLogMiner.Views.NewConnection
 {
@@ -19,9 +20,13 @@ namespace SqlLogMiner.Views.NewConnection
     /// </summary>
     public partial class ConnectDatabase : Window
     {
+        public Session NewSession;
         public ConnectDatabase()
         {
             InitializeComponent();
+
+            NewSession = new Session();
+            DataContext = NewSession;
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -31,9 +36,11 @@ namespace SqlLogMiner.Views.NewConnection
 
         private void Next(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            LogSelection logSelectionWindow = new LogSelection();
-            logSelectionWindow.ShowDialog();
+            LogSelection logSelectionWindow = new LogSelection(NewSession);
+            if (logSelectionWindow.ShowDialog() == true)
+            {
+                DialogResult = true;
+            }
             
         }
     }

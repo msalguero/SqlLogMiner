@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using SqlLogMiner.Entities;
 using SqlLogMiner.Views.NewConnection;
 
 namespace SqlLogMiner
@@ -23,6 +24,7 @@ namespace SqlLogMiner
     public partial class MainWindow : Window
     {
         private string SavePath { get; set; }
+        public Session CurrentSession { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +35,10 @@ namespace SqlLogMiner
         private void New(object sender, RoutedEventArgs e)
         {
             ConnectDatabase connectDatabase = new ConnectDatabase();
-            connectDatabase.ShowDialog();
+            if (connectDatabase.ShowDialog() == true)
+            {
+                CurrentSession = connectDatabase.NewSession;
+            }
         }
 
         private void Open(object sender, RoutedEventArgs e)

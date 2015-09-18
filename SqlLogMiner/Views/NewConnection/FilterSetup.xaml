@@ -10,7 +10,7 @@
         <Label Content="Filter Setup" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Button Click="Close" Content="X" HorizontalAlignment="Left" Margin="659,10,0,0" VerticalAlignment="Top" Width="27" BorderBrush="{x:Null}" Background="{x:Null}"/>
         <Grid HorizontalAlignment="Left" Height="50" Margin="0,546,0,0" VerticalAlignment="Top" Width="696" Background="#FFD6D6D6">
-            <Button Content="Next" HorizontalAlignment="Left" Margin="518,20,0,0" VerticalAlignment="Top" Width="76" Background="White"/>
+            <Button Click="Finish" Content="Finish" HorizontalAlignment="Left" Margin="518,20,0,0" VerticalAlignment="Top" Width="76" Background="White"/>
             <Button Click="Close" Content="Cancel" HorizontalAlignment="Left" Margin="611,20,0,0" VerticalAlignment="Top" Width="75" Background="White"/>
             <Button Click="Previous" Content="Previous" HorizontalAlignment="Left" Margin="426,20,0,0" VerticalAlignment="Top" Width="75" Background="#FFFFFBFB"/>
         </Grid>
@@ -20,10 +20,10 @@
             <ListBoxItem IsSelected="False" Name="TablesBoxItem" Content="Tables" FontSize="16" Foreground="Black"/>
         </ListBox>
         <Grid Name="TimeRangeGrid" Visibility="{Binding ElementName=TimeRangeBoxItem, Path=IsSelected,Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Left" Height="202" Margin="145,84,0,0" VerticalAlignment="Top" Width="436">
-            <RadioButton Name="WholeRadioButton" IsChecked="True" Content="Whole Transaction Log" IsEnabled="True" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
+            <RadioButton Name="WholeRadioButton" IsChecked="{Binding Path=WholeWholeLogSearch, Mode=TwoWay}" Content="Whole Transaction Log" IsEnabled="True" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
             <RadioButton Name="CustomRadioButton" Content="Custom" HorizontalAlignment="Left" Margin="20,62,0,0" VerticalAlignment="Top"/>
-            <DatePicker Name="From" IsEnabled="{Binding ElementName=CustomRadioButton, Path=IsChecked}" HorizontalAlignment="Left" Margin="58,82,0,0" VerticalAlignment="Top"/>
-            <DatePicker Name="To" IsEnabled="{Binding ElementName=CustomRadioButton, Path=IsChecked}" HorizontalAlignment="Left" Margin="59,111,0,0" VerticalAlignment="Top"/>
+            <DatePicker Name="From" SelectedDate="{Binding Path=From, Mode=TwoWay}" IsEnabled="{Binding ElementName=CustomRadioButton, Path=IsChecked}" HorizontalAlignment="Left" Margin="58,82,0,0" VerticalAlignment="Top"/>
+            <DatePicker Name="To" SelectedDate="{Binding Path=To, Mode=TwoWay}" IsEnabled="{Binding ElementName=CustomRadioButton, Path=IsChecked}" HorizontalAlignment="Left" Margin="59,111,0,0" VerticalAlignment="Top"/>
             <Label Content="From: " HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top"/>
             <Label Content="To:" HorizontalAlignment="Left" Margin="20,109,0,0" VerticalAlignment="Top"/>
         </Grid>
@@ -50,9 +50,9 @@
             </Border>
         </Grid>
         <Grid Name="OperationsGrid" Visibility="{Binding ElementName=OperationsBoxItem, Path=IsSelected,Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Left" Height="457" Margin="145,84,0,0" VerticalAlignment="Top" Width="508">
-            <CheckBox Content="Insert" HorizontalAlignment="Left" Margin="55,41,0,0" VerticalAlignment="Top"/>
-            <CheckBox Content="Delete" HorizontalAlignment="Left" Margin="55,74,0,0" VerticalAlignment="Top"/>
-            <CheckBox Content="Update" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top"/>
+            <CheckBox Content="Insert" IsChecked="{Binding Path=InsertOperation, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,41,0,0" VerticalAlignment="Top"/>
+            <CheckBox Content="Delete" IsChecked="{Binding Path=DeleteOperation, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,74,0,0" VerticalAlignment="Top"/>
+            <CheckBox Content="Update" IsChecked="{Binding Path=UpdateOperation, Mode=TwoWay}" HorizontalAlignment="Left" Margin="55,109,0,0" VerticalAlignment="Top"/>
             <Label Content="Operations:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
         </Grid>

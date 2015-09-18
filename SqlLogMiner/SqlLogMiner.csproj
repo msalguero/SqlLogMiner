@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\Session.cs" />
     <Compile Include="Views\NewConnection\ConnectDatabase.xaml.cs">
       <DependentUpon>ConnectDatabase.xaml</DependentUpon>
     </Compile>

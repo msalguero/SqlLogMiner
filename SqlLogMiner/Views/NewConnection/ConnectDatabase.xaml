@@ -10,17 +10,17 @@
         <Label Content="User:" HorizontalAlignment="Left" Margin="153,239,0,0" VerticalAlignment="Top"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="136,270,0,0" VerticalAlignment="Top"/>
         <Label Content="Database:" HorizontalAlignment="Left" Margin="127,322,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="ServerTextBox" HorizontalAlignment="Left" Height="23" Margin="240,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
-        <ComboBox Name="AuthComboBox" HorizontalAlignment="Left" Margin="240,193,0,0" VerticalAlignment="Top" Width="257" Background="{x:Null}">
+        <TextBox Name="ServerTextBox" Text="{Binding Path=ServerName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="240,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257"/>
+        <ComboBox Name="AuthComboBox" Text="{Binding Path=Authentication, Mode=TwoWay}" HorizontalAlignment="Left" Margin="240,193,0,0" VerticalAlignment="Top" Width="257" Background="{x:Null}">
             <ComboBoxItem Content="Windows Authentication" HorizontalAlignment="Left" Width="255"/>
             <ComboBoxItem Name="SqlAuthComboBoxItem" Content="SQL Server Authentication" HorizontalAlignment="Left" Width="255"/>
         </ComboBox>
-        <TextBox Name="UserTextBox" IsEnabled="{Binding ElementName=SqlAuthComboBoxItem, Path=IsSelected}" HorizontalAlignment="Left" Height="23" Margin="240,239,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
-        <TextBox Name="PasswordTextBox" IsEnabled="{Binding ElementName=SqlAuthComboBoxItem, Path=IsSelected}" HorizontalAlignment="Left" Height="24" Margin="240,274,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
-        <TextBox Name="DatabasTextBox" HorizontalAlignment="Left" Height="22" Margin="240,326,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257"/>
+        <TextBox Name="UserTextBox" Text="{Binding Path=UserName, Mode=TwoWay}" IsEnabled="{Binding ElementName=SqlAuthComboBoxItem, Path=IsSelected}" HorizontalAlignment="Left" Height="23" Margin="240,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257"/>
+        <TextBox Name="PasswordTextBox" Text="{Binding Path=Password, Mode=TwoWay}" IsEnabled="{Binding ElementName=SqlAuthComboBoxItem, Path=IsSelected}" HorizontalAlignment="Left" Height="24" Margin="240,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257"/>
+        <TextBox Name="DatabaseTextBox" Text="{Binding Path=Database, Mode=TwoWay}" HorizontalAlignment="Left" Height="22" Margin="240,326,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257"/>
         <Grid HorizontalAlignment="Left" Height="50" Margin="0,546,0,0" VerticalAlignment="Top" Width="696" Background="#FFD6D6D6">
             <Button Click="Next" Content="Next" HorizontalAlignment="Left" Margin="518,20,0,0" VerticalAlignment="Top" Width="76" Background="White"/>
-            <Button Content="Cancel" HorizontalAlignment="Left" Margin="611,20,0,0" VerticalAlignment="Top" Width="75" Background="White"/>
+            <Button Click="Close" Content="Cancel" HorizontalAlignment="Left" Margin="611,20,0,0" VerticalAlignment="Top" Width="75" Background="White"/>
         </Grid>
     </Grid>
 </Window>

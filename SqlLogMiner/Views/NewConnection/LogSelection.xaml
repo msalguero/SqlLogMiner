@@ -10,7 +10,7 @@
             <Button Click="Close" Content="Cancel" HorizontalAlignment="Left" Margin="611,20,0,0" VerticalAlignment="Top" Width="75" Background="White"/>
             <Button Click="Previous" Content="Previous" HorizontalAlignment="Left" Margin="426,20,0,0" VerticalAlignment="Top" Width="75" Background="#FFFFFBFB"/>
         </Grid>
-        <ListBox Name="LogsListBox" HorizontalAlignment="Left" Height="402" Margin="10,57,0,0" VerticalAlignment="Top" Width="676"/>
+        <ListBox Name="LogsListBox" SelectedItem="{Binding Path=LogPath, Mode=TwoWay}" HorizontalAlignment="Left" Height="402" Margin="10,57,0,0" VerticalAlignment="Top" Width="676"/>
         <Button Click="Add" Margin="608,476,37,74" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
