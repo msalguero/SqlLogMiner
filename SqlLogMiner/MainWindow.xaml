@@ -7,18 +7,19 @@
         <Custom:Ribbon HorizontalAlignment="Left" VerticalAlignment="Top" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}">
             <Custom:RibbonTab Header="Home">
                 <Custom:RibbonGroup Header="Session">
-                    <Custom:RibbonButton LargeImageSource="Images\new.png" Label="New" KeyTip="X" />
-                    <Custom:RibbonButton LargeImageSource="Images\open.png" Label="Open" KeyTip="C" />
+                    <Custom:RibbonButton Click="New" LargeImageSource="Images\new.png" Label="New" KeyTip="X" />
+                    <Custom:RibbonButton Click="Open" LargeImageSource="Images\open.png" Label="Open" KeyTip="C" />
                     <Custom:RibbonButton LargeImageSource="Images\sessionSettings.png" Label="Session Settings" KeyTip="FP" />
                     <Custom:RibbonMenuButton LargeImageSource="Images\save.png" Label="Save" KeyTip="V">
-                        <Custom:RibbonMenuItem ImageSource="Images\saveAs.png" Header="Save as" KeyTip="T"/>
+                        <Custom:RibbonMenuItem Click="Save" ImageSource="Images\saveSmall.png" Header="Save" KeyTip="T"/>
+                        <Custom:RibbonMenuItem Click="SaveAs" ImageSource="Images\saveAs.png" Header="Save as" KeyTip="T"/>
                     </Custom:RibbonMenuButton>
                 </Custom:RibbonGroup>
                 <Custom:RibbonGroup Header="Actions">
     
                 </Custom:RibbonGroup>
                 <Custom:RibbonGroup Header="Results">
-
+                    <Custom:RibbonButton LargeImageSource="Images\refresh.png" Label="Refresh" KeyTip="X" />
                 </Custom:RibbonGroup>
             </Custom:RibbonTab>
             <Custom:RibbonTab Header="View">
