@@ -21,12 +21,15 @@ namespace SqlLogMiner.Views.NewConnection
     public partial class ConnectDatabase : Window
     {
         public Session NewSession;
+        public List<string> ServerInstances { get; set; } 
         public ConnectDatabase()
         {
             InitializeComponent();
 
             NewSession = new Session();
+            ServerInstances = SqlServerManager.GetSqlServerInstances();
             DataContext = NewSession;
+            ServerListBox.ItemsSource = ServerInstances;
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -40,6 +43,21 @@ namespace SqlLogMiner.Views.NewConnection
             if (logSelectionWindow.ShowDialog() == true)
             {
                 DialogResult = true;
+            }
+            
+        }
+
+        private void OnDropDownOpen(object sender, EventArgs e)
+        {
+            try
+            {
+                DatabaseTextBox.ItemsSource = SqlServerManager.GetDatabases(NewSession.ServerName, NewSession.Authentication == "Windows Authentication",
+                NewSession.UserName, NewSession.Password);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Could not Connect");
             }
             
         }

@@ -25,16 +25,19 @@ namespace SqlLogMiner
     {
         private string SavePath { get; set; }
         public Session CurrentSession { get; set; }
+        public SqlServerManager SqlServerManager { get; set; }
         public MainWindow()
         {
             InitializeComponent();
 
             SavePath = "";
+            SqlServerManager = new SqlServerManager();
         }
 
         private void New(object sender, RoutedEventArgs e)
         {
             ConnectDatabase connectDatabase = new ConnectDatabase();
+            
             if (connectDatabase.ShowDialog() == true)
             {
                 CurrentSession = connectDatabase.NewSession;

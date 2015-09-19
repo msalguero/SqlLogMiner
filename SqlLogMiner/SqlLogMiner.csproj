@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Entities\Session.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="SqlServerManager.cs" />
     <Compile Include="Views\NewConnection\ConnectDatabase.xaml.cs">
       <DependentUpon>ConnectDatabase.xaml</DependentUpon>
     </Compile>

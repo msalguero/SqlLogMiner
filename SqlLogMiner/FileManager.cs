@@ -72,6 +72,7 @@ namespace SqlLogMiner
             catch (Exception ex)
             {
                 //Log exception here
+                
             }
 
             return objectOut;
