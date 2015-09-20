@@ -41,7 +41,7 @@
                 <CheckBox Content="Update" IsChecked="True" HorizontalAlignment="Left" Margin="55,242,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
-        <DataGrid Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="967" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
+        <DataGrid SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="OnSelectedRowChanged" Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="967" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn/>
                 <DataGridTextColumn Header="Operation" Binding="{Binding Path=Operation, Mode=TwoWay}"/>
@@ -56,7 +56,7 @@
         <TabControl HorizontalAlignment="Left" Height="100" Margin="10,552,0,0" VerticalAlignment="Top" Width="1272">
             <TabItem Header="Row Detail">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,-14">
-                    <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="86" Width="1266"/>
+                    <DataGrid Name="RowDetailsGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="86" Width="1266"/>
                 </Grid>
             </TabItem>
         </TabControl>

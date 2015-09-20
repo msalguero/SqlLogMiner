@@ -101,5 +101,13 @@ namespace SqlLogMiner
                 FileManager.SerializeObject<Session>(CurrentSession, SavePath);
             }
         }
+
+        private void OnSelectedRowChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TransactionLogRow selectedRow = (TransactionLogRow) TransactionLogGrid.SelectedItem;
+            TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
+            TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0,ref selectedTableSchema);
+            RowDetailsGrid.ItemsSource = selectedTableSchema.Columns;
+        }
     }
 }

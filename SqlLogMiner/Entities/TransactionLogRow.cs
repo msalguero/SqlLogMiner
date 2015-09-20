@@ -15,7 +15,7 @@ namespace SqlLogMiner.Entities
         public string User { get; set; }
         public DateTime BeginTime { get; set; }
         public string LSN { get; set; }
-        public string RowLogContents0 { get; set; }
-        public string RowLogContents1 { get; set; }
+        public byte[] RowLogContents0 { get; set; }
+        public byte[] RowLogContents1 { get; set; }
     }
 }

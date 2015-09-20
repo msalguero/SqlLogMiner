@@ -41,7 +41,7 @@ namespace SqlLogMiner.Entities
             if(InsertOperation)
                 operations.Add("LOP_INSERT_ROWS");
             if(DeleteOperation)
-                operations.Add("LOP_DELETE_ROWS");
+                operations.Add("LOP_MODIFY_ROWS");
             if(UpdateOperation)
                 operations.Add("LOP_UPDATE_ROWS");
 

@@ -165,8 +165,8 @@ namespace SqlLogMiner
                     BeginTime = DateTime.ParseExact(row["Begin Time"].ToString(), "yyyy/MM/dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
                     Schema = schemaAndObject[0],
                     Object = schemaAndObject[1],
-                    RowLogContents0 = row["RowLog Contents 0"].ToString(),
-                    RowLogContents1 = row["RowLog Contents 1"].ToString()
+                    RowLogContents0 = (byte[])row["RowLog Contents 0"],
+                    RowLogContents1 = (byte[])row["RowLog Contents 1"]
                 });
                 
             }
@@ -191,6 +191,18 @@ namespace SqlLogMiner
             }
 
             return query + "log1.[AllocUnitName] = 'dbo.Banco'";
+        }
+
+        public TableSchema GetTableSchema(string database, string table)
+        {
+            var columns = _sqlConnection.GetSchema("Columns", new[] { database, null, table});
+            TableSchema tableSchema = new TableSchema();
+            foreach (DataRow column in columns.Rows)
+            {
+                tableSchema.Columns.Add(new Column { Type = column.ItemArray[7].ToString(), ColumnName = column.ItemArray[3].ToString() });
+            }
+
+            return tableSchema;
         }
     }
 }
