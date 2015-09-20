@@ -64,7 +64,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\TransactionLogRow.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="Models\DataGridFilterTableModel.cs" />
     <Compile Include="SqlServerManager.cs" />
     <Compile Include="Views\NewConnection\ConnectDatabase.xaml.cs">
       <DependentUpon>ConnectDatabase.xaml</DependentUpon>

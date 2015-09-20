@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SqlLogMiner.Entities;
+using SqlLogMiner.Models;
 
 namespace SqlLogMiner.Views.NewConnection
 {
@@ -26,6 +27,7 @@ namespace SqlLogMiner.Views.NewConnection
             InitializeComponent();
             NewSession = newSession;
             DataContext = NewSession;
+            UserTableDataGrid.ItemsSource = SqlServerManager.GetUserTables(NewSession.ServerName,NewSession.Authentication == "Windows Authentication",NewSession.UserName,NewSession.Password,NewSession.Database);
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -42,6 +44,13 @@ namespace SqlLogMiner.Views.NewConnection
 
         private void Finish(object sender, RoutedEventArgs e)
         {
+            foreach (DataGridFilterTableModel row in UserTableDataGrid.ItemsSource)
+            {
+                if (row.IsChecked)
+                {
+                    NewSession.Tables.Add(row.SchemaName + "." + row.TableName);
+                }
+            }
             DialogResult = true;
         }
     }

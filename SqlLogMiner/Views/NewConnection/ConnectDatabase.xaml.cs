@@ -34,7 +34,7 @@ namespace SqlLogMiner.Views.NewConnection
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Next(object sender, RoutedEventArgs e)

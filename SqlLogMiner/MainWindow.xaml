@@ -16,7 +16,7 @@
                     </Custom:RibbonMenuButton>
                 </Custom:RibbonGroup>
                 <Custom:RibbonGroup Header="Actions">
-    
+
                 </Custom:RibbonGroup>
                 <Custom:RibbonGroup Header="Results">
                     <Custom:RibbonButton LargeImageSource="Images\refresh.png" Label="Refresh" KeyTip="X" />
@@ -27,5 +27,31 @@
             <Custom:RibbonTab Header="Resources">
             </Custom:RibbonTab>
         </Custom:Ribbon>
+        <Border BorderThickness="1" HorizontalAlignment="Left" Height="404" Margin="10,143,0,0" VerticalAlignment="Top" Width="300" BorderBrush="#FFC1B7B7">
+            <Grid>
+                <Label Content="Table Filter" FontSize="18" Foreground="#FF1930C1"/>
+                <Label Margin="30,40,136,324" Content="Time Range" FontSize="14"></Label>
+                <DatePicker Name="From" HorizontalAlignment="Left" Margin="58,82,0,0" VerticalAlignment="Top"/>
+                <DatePicker Name="To" HorizontalAlignment="Left" Margin="59,111,0,0" VerticalAlignment="Top"/>
+                <Label Content="From: " HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top"/>
+                <Label Content="To:" HorizontalAlignment="Left" Margin="20,109,0,0" VerticalAlignment="Top"/>
+                <Label Margin="30,164,136,200" Content="Operations" FontSize="14"></Label>
+                <CheckBox Content="Insert" IsChecked="True" HorizontalAlignment="Left" Margin="55,202,0,0" VerticalAlignment="Top"/>
+                <CheckBox Content="Delete" IsChecked="True" HorizontalAlignment="Left" Margin="55,222,0,0" VerticalAlignment="Top"/>
+                <CheckBox Content="Update" IsChecked="True" HorizontalAlignment="Left" Margin="55,242,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+        <DataGrid Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="967" Background="White">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn/>
+                <DataGridTextColumn Header="Operation" Binding="{Binding Path=Operation, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Schema" Binding="{Binding Path=Schema, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Object" Binding="{Binding Path=Object, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="User" Binding="{Binding Path=User, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Transaction ID" Binding="{Binding Path=TransactionId, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Begin Time" Binding="{Binding Path=BeginTime, Mode=TwoWay}"/>
+                <DataGridTextColumn Header="LSN" Binding="{Binding Path=LSN}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

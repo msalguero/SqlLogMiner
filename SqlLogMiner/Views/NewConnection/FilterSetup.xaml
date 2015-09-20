@@ -33,9 +33,9 @@
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="401" Margin="10,46,0,0" VerticalAlignment="Top" Width="216">
                 <DataGrid Name="UserTableDataGrid" BorderBrush="#FFE0D9D9" Background="White">
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn/>
-                        <DataGridTextColumn Header="Schema"/>
-                        <DataGridTextColumn Header="Table"/>
+                        <DataGridCheckBoxColumn Binding="{Binding Path=IsChecked, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Schema" Binding="{Binding Path=SchemaName, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Table" Binding="{Binding Path=TableName, Mode=TwoWay}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>

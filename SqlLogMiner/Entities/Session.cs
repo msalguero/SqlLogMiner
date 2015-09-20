@@ -21,6 +21,31 @@ namespace SqlLogMiner.Entities
         public bool InsertOperation { get; set; }
         public bool DeleteOperation { get; set; }
         public bool UpdateOperation { get; set; }
-        public string Tables { get; set; }
+        public List<string> Tables { get; set; }
+
+        public Session()
+        {
+            From = DateTime.UtcNow;
+            To = DateTime.UtcNow;
+            InsertOperation = true;
+            DeleteOperation = true;
+            UpdateOperation = true;
+            WholeLogSearch = true;
+            Tables = new List<string>();
+        }
+
+        public string[] GetOperationsList()
+        {
+            List<string> operations = new List<string>();
+
+            if(InsertOperation)
+                operations.Add("LOP_INSERT_ROWS");
+            if(DeleteOperation)
+                operations.Add("LOP_DELETE_ROWS");
+            if(UpdateOperation)
+                operations.Add("LOP_UPDATE_ROWS");
+
+            return operations.ToArray();
+        }
     }
 }

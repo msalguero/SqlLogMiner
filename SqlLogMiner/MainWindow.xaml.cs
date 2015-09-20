@@ -34,6 +34,23 @@ namespace SqlLogMiner
             SqlServerManager = new SqlServerManager();
         }
 
+        private void ConnectToDatabase()
+        {
+            if (CurrentSession.Authentication == "Windows Authentication")
+                SqlServerManager.ConnectWindowsAuth(CurrentSession.ServerName, CurrentSession.Database);
+            else
+                SqlServerManager.ConnectSqlServerAuth(CurrentSession.ServerName, CurrentSession.Database,
+                    CurrentSession.UserName, CurrentSession.Password);
+
+            GetTransactionLog();
+        }
+
+        private void GetTransactionLog()
+        {
+
+            TransactionLogGrid.ItemsSource = SqlServerManager.GetTransactionLog(CurrentSession.From, CurrentSession.To, CurrentSession.GetOperationsList(), "valor");
+        }
+
         private void New(object sender, RoutedEventArgs e)
         {
             ConnectDatabase connectDatabase = new ConnectDatabase();
@@ -41,6 +58,7 @@ namespace SqlLogMiner
             if (connectDatabase.ShowDialog() == true)
             {
                 CurrentSession = connectDatabase.NewSession;
+                ConnectToDatabase();
             }
         }
 
@@ -50,7 +68,9 @@ namespace SqlLogMiner
             if (openFileDialog.ShowDialog() == true)
             {
                 CurrentSession = FileManager.DeSerializeObject<Session>(openFileDialog.FileName);
+                ConnectToDatabase();
             }
+            GetTransactionLog();
         }
 
         private void Save(object sender, RoutedEventArgs e)
