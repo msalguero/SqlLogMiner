@@ -19,6 +19,11 @@ namespace SqlLogMiner
             _sqlConnection = new SqlConnection();
         }
 
+        public void Disconnect()
+        {
+            _sqlConnection.Close();
+        }
+
         public static List<string> GetSqlServerInstances()
         {
             System.Data.Sql.SqlDataSourceEnumerator instance = System.Data.Sql.SqlDataSourceEnumerator.Instance;
@@ -159,7 +164,9 @@ namespace SqlLogMiner
                     LSN = row["Current LSN"].ToString(),
                     BeginTime = DateTime.ParseExact(row["Begin Time"].ToString(), "yyyy/MM/dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
                     Schema = schemaAndObject[0],
-                    Object = schemaAndObject[1]
+                    Object = schemaAndObject[1],
+                    RowLogContents0 = row["RowLog Contents 0"].ToString(),
+                    RowLogContents1 = row["RowLog Contents 1"].ToString()
                 });
                 
             }
@@ -169,7 +176,7 @@ namespace SqlLogMiner
 
         private string ConstructTransactionLogQuery(DateTime from, DateTime to, string[] operations, string schemaObject)
         {
-            string query = "select log1.[Operation], log1.[AllocUnitName],SUSER_SNAME(log2.[Transaction SID]) as UserName , log2.[Begin Time], log1.[Transaction ID], log1.[Current LSN] from fn_dblog(NULL,NULL) as log1 Inner Join ("
+            string query = "select log1.[Operation], log1.[AllocUnitName],SUSER_SNAME(log2.[Transaction SID]) as UserName , log2.[Begin Time], log1.[Transaction ID], log1.[Current LSN], log1.[RowLog Contents 0], log1.[RowLog Contents 1] from fn_dblog(NULL,NULL) as log1 Inner Join ("
             + "select [Transaction ID],[Transaction SID], [Begin Time] from fn_dblog(NULL,NULL) where [Begin Time] >= '" + from.ToString("yyyy/MM/dd HH:mm:ss") + "' AND [Begin Time] <= '" + to.ToString("yyyy-MMdd HH:mm:ss") + "' "
             + ") as log2 on log1.[Transaction ID] = log2.[Transaction ID] where ";
             if (operations.Count() != 0)

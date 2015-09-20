@@ -53,6 +53,15 @@ namespace SqlLogMiner
 
         private void New(object sender, RoutedEventArgs e)
         {
+            if (CurrentSession != null)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Save changes to session?", "New Session",MessageBoxButton.YesNoCancel);
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                        Save(sender,e);
+                if (messageBoxResult == MessageBoxResult.Cancel)
+                    return;
+                SqlServerManager.Disconnect();
+            }
             ConnectDatabase connectDatabase = new ConnectDatabase();
             
             if (connectDatabase.ShowDialog() == true)
