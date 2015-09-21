@@ -21,12 +21,10 @@ namespace SqlLogMiner
             {
                 if (column.Type == "int")
                 {
-                    //string hexValue = RevertBytes(rowLogContents.Substring(rowPointer, 8));
                     column.Value = BitConverter.ToInt32(rowLogContents.SubArray(rowPointer,4),0).ToString();
                     rowPointer += 4;
                 }else if (column.Type == "char")
                 {
-                    //string hexValue = RevertBytes(rowLogContents.Substring(rowPointer, 2));
                     column.Value = BitConverter.ToChar(new byte[2] { rowLogContents[rowPointer], 0}, 0).ToString();
                     rowPointer += 1;
                 }

@@ -48,7 +48,7 @@ namespace SqlLogMiner
         private void GetTransactionLog()
         {
 
-            TransactionLogGrid.ItemsSource = SqlServerManager.GetTransactionLog(CurrentSession.From, CurrentSession.To, CurrentSession.GetOperationsList(), "valor");
+            TransactionLogGrid.ItemsSource = SqlServerManager.GetTransactionLog(CurrentSession.From, CurrentSession.To, CurrentSession.GetOperationsList(), CurrentSession.Tables.ToArray());
         }
 
         private void New(object sender, RoutedEventArgs e)

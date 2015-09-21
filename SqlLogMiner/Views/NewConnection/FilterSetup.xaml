@@ -31,7 +31,7 @@
             <Label Content="User Tables:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
             <Label Content="System Tables:" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" FontSize="16"/>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="401" Margin="10,46,0,0" VerticalAlignment="Top" Width="216">
-                <DataGrid Name="UserTableDataGrid" BorderBrush="#FFE0D9D9" Background="White">
+                <DataGrid Name="UserTableDataGrid" AutoGenerateColumns="False" BorderBrush="#FFE0D9D9" Background="White">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Binding="{Binding Path=IsChecked, Mode=TwoWay}"/>
                         <DataGridTextColumn Header="Schema" Binding="{Binding Path=SchemaName, Mode=TwoWay}"/>

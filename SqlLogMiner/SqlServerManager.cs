@@ -143,7 +143,7 @@ namespace SqlLogMiner
             return new SqlConnection(strConn);
         }
 
-        public List<TransactionLogRow> GetTransactionLog(DateTime from, DateTime to, string[] operations, string schemaObject)
+        public List<TransactionLogRow> GetTransactionLog(DateTime from, DateTime to, string[] operations, string[] schemaObject)
         {
             List<TransactionLogRow> transactionLog = new List<TransactionLogRow>();
             string query = ConstructTransactionLogQuery(from, to, operations, schemaObject);
@@ -174,7 +174,7 @@ namespace SqlLogMiner
             return transactionLog;
         }
 
-        private string ConstructTransactionLogQuery(DateTime from, DateTime to, string[] operations, string schemaObject)
+        private string ConstructTransactionLogQuery(DateTime from, DateTime to, string[] operations, string[] schemaObjects)
         {
             string query = "select log1.[Operation], log1.[AllocUnitName],SUSER_SNAME(log2.[Transaction SID]) as UserName , log2.[Begin Time], log1.[Transaction ID], log1.[Current LSN], log1.[RowLog Contents 0], log1.[RowLog Contents 1] from fn_dblog(NULL,NULL) as log1 Inner Join ("
             + "select [Transaction ID],[Transaction SID], [Begin Time] from fn_dblog(NULL,NULL) where [Begin Time] >= '" + from.ToString("yyyy/MM/dd HH:mm:ss") + "' AND [Begin Time] <= '" + to.ToString("yyyy-MMdd HH:mm:ss") + "' "
@@ -185,12 +185,22 @@ namespace SqlLogMiner
             {
                 query += "log1.[Operation] = '" + operation;
                 if (operations.Last() == operation)
-                    query += "') and ";
+                    query += "') and (";
                 else
                     query += "' or ";
             }
 
-            return query + "log1.[AllocUnitName] = 'dbo.Banco'";
+            foreach (var schemaObject in schemaObjects)
+            {
+                query += "log1.[AllocUnitName] = '" + schemaObject;
+                if (schemaObjects.Last() == schemaObject)
+                    query += "')";
+                else
+                    query += "' or ";
+                
+            }
+
+            return query ;
         }
 
         public TableSchema GetTableSchema(string database, string table)
