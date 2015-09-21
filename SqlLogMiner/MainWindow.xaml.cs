@@ -55,12 +55,7 @@ namespace SqlLogMiner
         {
             if (CurrentSession != null)
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Save changes to session?", "New Session",MessageBoxButton.YesNoCancel);
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                        Save(sender,e);
-                if (messageBoxResult == MessageBoxResult.Cancel)
-                    return;
-                SqlServerManager.Disconnect();
+                PromptSaveMessage(sender,e);
             }
             ConnectDatabase connectDatabase = new ConnectDatabase();
             
@@ -71,8 +66,22 @@ namespace SqlLogMiner
             }
         }
 
+        private void PromptSaveMessage(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Save changes to session?", "New Session", MessageBoxButton.YesNoCancel);
+            if (messageBoxResult == MessageBoxResult.Yes)
+                Save(sender, e);
+            if (messageBoxResult == MessageBoxResult.Cancel)
+                return;
+            SqlServerManager.Disconnect();
+        }
+
         private void Open(object sender, RoutedEventArgs e)
         {
+            if (CurrentSession != null)
+            {
+                PromptSaveMessage(sender, e);
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {

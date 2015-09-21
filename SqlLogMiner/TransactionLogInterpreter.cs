@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,25 @@ namespace SqlLogMiner
                 {
                     column.Value = BitConverter.ToChar(new byte[2] { rowLogContents[rowPointer], 0}, 0).ToString();
                     rowPointer += 1;
+                }
+                else if (column.Type == "datetime")
+                {
+                    var baseDate = "1900-01-01 00:00";
+                    var date = DateTime.ParseExact(baseDate, "yyyy-MM-dd HH:mm", null);
+                    date = date.AddDays(BitConverter.ToUInt32(rowLogContents, rowPointer + 4));
+                    date = date.AddSeconds(BitConverter.ToUInt32(rowLogContents, rowPointer)/300);
+                    column.Value = date.ToString("yyyy/MM/dd HH:mm:ss");
+                    rowPointer += 8;
+                }
+                else if (column.Type == "smalldatetime")
+                {
+                    var baseDate = "1900-01-01 00:00";
+                    var date = DateTime.ParseExact(baseDate, "yyyy-MM-dd HH:mm", null);
+                    int days = BitConverter.ToUInt16(rowLogContents, rowPointer + 2);
+                    date = date.AddDays(days);
+                    date = date.AddMinutes(BitConverter.ToUInt16(rowLogContents, rowPointer));
+                    column.Value = date.ToString("yyyy/MM/dd HH:mm:ss");
+                    rowPointer += 4;
                 }
             }
             
