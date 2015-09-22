@@ -113,6 +113,55 @@ namespace SqlLogMiner
          
         }
 
+        public static string RedoScript(TableSchema tableSchema, string operation)
+        {
+            string script = "";
+
+            if (operation == "LOP_INSERT_ROWS")
+                return GenerateInsert(tableSchema);
+            else if (operation == "LOP_DELETE_ROWS")
+                return GenerateDelete(tableSchema);
+            return script;
+        }
+
+        private static string GenerateDelete(TableSchema tableSchema)
+        {
+            string script = "DELETE FROM " + tableSchema.TableName + "WHERE ";
+
+            foreach (var column in tableSchema.Columns)
+            {
+                script = script + column.ColumnName+" = '"+ column.Value+"'";
+                if (tableSchema.Columns.Last() != column)
+                    script += " AND ";
+            }
+            return script;
+        }
+
+        private static string GenerateInsert(TableSchema tableSchema)
+        {
+            string script = "INSERT INTO " + tableSchema.TableName + " values('";
+
+            foreach (var column in tableSchema.Columns)
+            {
+                script += column.Value;
+                if (tableSchema.Columns.Last() == column)
+                    script += "')";
+                else
+                    script += "', '";
+            }
+            return script;
+        }
+
+        public static string UndoScript(TableSchema tableSchema, string operation)
+        {
+            string script = "";
+            if (operation == "LOP_INSERT_ROWS")
+                return GenerateDelete(tableSchema);
+            else if (operation == "LOP_DELETE_ROWS")
+                return GenerateInsert(tableSchema);
+            return script;
+        }
+
         private static string parseToBinary(byte[] array)
         {
             string binaryString = "";

@@ -47,8 +47,8 @@ namespace SqlLogMiner
 
         private void GetTransactionLog()
         {
-
-            TransactionLogGrid.ItemsSource = SqlServerManager.GetTransactionLog(CurrentSession.From, CurrentSession.To, CurrentSession.GetOperationsList(), CurrentSession.Tables.ToArray());
+            if(CurrentSession != null)
+                TransactionLogGrid.ItemsSource = SqlServerManager.GetTransactionLog(CurrentSession.From, CurrentSession.To, CurrentSession.GetOperationsList(), CurrentSession.Tables.ToArray());
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -85,10 +85,17 @@ namespace SqlLogMiner
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
+                
                 CurrentSession = FileManager.DeSerializeObject<Session>(openFileDialog.FileName);
+                if (CurrentSession == null)
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Wrong File Type", "Open Session", MessageBoxButton.OK);
+                    return;
+                }
                 ConnectToDatabase();
+                GetTransactionLog();
+                SavePath = openFileDialog.FileName;
             }
-            GetTransactionLog();
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -117,6 +124,27 @@ namespace SqlLogMiner
             TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
             TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0,ref selectedTableSchema);
             RowDetailsGrid.ItemsSource = selectedTableSchema.Columns;
+        }
+
+        private void RedoScript(object sender, RoutedEventArgs e)
+        {
+            TransactionLogRow selectedRow = (TransactionLogRow)TransactionLogGrid.SelectedItem;
+            TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
+            TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0, ref selectedTableSchema);
+            string text = TransactionLogInterpreter.RedoScript(selectedTableSchema,selectedRow.Operation);
+        }
+
+        private void UndoScript(object sender, RoutedEventArgs e)
+        {
+            TransactionLogRow selectedRow = (TransactionLogRow)TransactionLogGrid.SelectedItem;
+            TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
+            TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0, ref selectedTableSchema);
+            string text = TransactionLogInterpreter.UndoScript(selectedTableSchema, selectedRow.Operation);
+        }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        {
+            GetTransactionLog();
         }
     }
 }

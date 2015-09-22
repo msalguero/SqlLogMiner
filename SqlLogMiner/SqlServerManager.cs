@@ -207,6 +207,7 @@ namespace SqlLogMiner
         {
             var columns = _sqlConnection.GetSchema("Columns", new[] { database, null, table});
             TableSchema tableSchema = new TableSchema();
+            tableSchema.TableName = table;
             foreach (DataRow column in columns.Rows)
             {
                 if (column.ItemArray[7].ToString() == "decimal" || column.ItemArray[7].ToString() == "numeric")
