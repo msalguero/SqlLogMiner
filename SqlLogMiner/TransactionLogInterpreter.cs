@@ -48,6 +48,46 @@ namespace SqlLogMiner
                     column.Value = date.ToString("yyyy/MM/dd HH:mm:ss");
                     rowPointer += 4;
                 }
+                else if (column.Type == "bigint")
+                {
+                    column.Value = BitConverter.ToInt64(rowLogContents.SubArray(rowPointer, 8), 0).ToString();
+                    rowPointer += 8;
+                }
+                else if (column.Type == "tinyint")
+                {
+                    column.Value = rowLogContents[rowPointer++].ToString();
+                }
+                else if (column.Type == "money")
+                {
+                    column.Value = ((BitConverter.ToInt64(rowLogContents, rowPointer)) / 10000).ToString();
+                    rowPointer += 8;
+                }
+                else if (column.Type.Contains("decimal") || column.Type.Contains(("numeric")))
+                {
+                    int precision = Int32.Parse(column.Type.Split('(')[1].Split(',')[0]);
+                    int byteCount = GetByteLengthForPrecision(precision);
+                    column.Value = BitConverter.ToInt64(rowLogContents.SubArray(rowPointer+1, byteCount-1), 0).ToString();
+                    rowPointer += byteCount;
+                }
+                else if (column.Type == "float")
+                {
+                    column.Value = BitConverter.ToDouble(rowLogContents, rowPointer).ToString();
+                    rowPointer += 8;
+                }
+                else if (column.Type == "real")
+                {
+                    column.Value = BitConverter.ToSingle(rowLogContents, rowPointer).ToString();
+                    rowPointer += 4;
+                }
+                else if (column.Type == "bit")
+                {
+                    column.Value = rowLogContents[rowPointer++].ToString();
+                }
+                else if (column.Type.Contains("binary"))
+                {
+                    int bitCount = Int32.Parse(column.Type.Split('(')[1].Split(')')[0]);
+                    column.Value = parseToBinary(rowLogContents.SubArray(rowPointer, bitCount));
+                }
             }
             
             short columnCount = BitConverter.ToInt16(rowLogContents, rowPointer);
@@ -73,6 +113,17 @@ namespace SqlLogMiner
          
         }
 
+        private static string parseToBinary(byte[] array)
+        {
+            string binaryString = "";
+            foreach (var currentByte in array)
+            {
+                binaryString += Convert.ToString(currentByte, 2);
+            }
+
+            return binaryString;
+        }
+
         private static byte[] RevertBytes(byte[] byteArray)
         {
             byte[] newByteArray = new byte[byteArray.Length];
@@ -88,6 +139,28 @@ namespace SqlLogMiner
             T[] result = new T[length];
             Array.Copy(data, index, result, 0, length);
             return result;
+        }
+
+        private static int GetByteLengthForPrecision(int precision)
+        {
+            if (precision <= 9)
+            {
+                return 5;
+            }
+            else if (precision <= 19)
+            {
+                return 9;
+            }
+            else if (precision <= 28)
+            {
+                return 13;
+            }
+            else if(precision <= 38)
+            {
+                return 17;
+            }
+
+            return 0;
         }
     }
 }

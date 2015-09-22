@@ -209,7 +209,13 @@ namespace SqlLogMiner
             TableSchema tableSchema = new TableSchema();
             foreach (DataRow column in columns.Rows)
             {
-                tableSchema.Columns.Add(new Column { Type = column.ItemArray[7].ToString(), ColumnName = column.ItemArray[3].ToString() });
+                if (column.ItemArray[7].ToString() == "decimal" || column.ItemArray[7].ToString() == "numeric")
+                    tableSchema.Columns.Add(new Column { Type = column.ItemArray[7] + "(" + column.ItemArray[10] + "," + column.ItemArray[12] + ")", ColumnName = column.ItemArray[3].ToString() });
+                else if (column.ItemArray[7].ToString() == "binary")
+                    tableSchema.Columns.Add(new Column { Type = column.ItemArray[7] + "(" + column.ItemArray[8] + ")", ColumnName = column.ItemArray[3].ToString() });
+                else
+                    tableSchema.Columns.Add(new Column { Type = column.ItemArray[7].ToString(), ColumnName = column.ItemArray[3].ToString() });
+
             }
 
             return tableSchema;
