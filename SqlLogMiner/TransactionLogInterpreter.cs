@@ -24,10 +24,13 @@ namespace SqlLogMiner
                 {
                     column.Value = BitConverter.ToInt32(rowLogContents.SubArray(rowPointer,4),0).ToString();
                     rowPointer += 4;
-                }else if (column.Type == "char")
+                }
+                else if (column.Type.Contains("char("))
                 {
-                    column.Value = BitConverter.ToChar(new byte[2] { rowLogContents[rowPointer], 0}, 0).ToString();
-                    rowPointer += 1;
+                    int charCount = Int32.Parse(column.Type.Split('(')[1].Split(')')[0]);
+                    column.Value = ParseToCharArray(rowLogContents.SubArray(rowPointer,charCount));
+                    //column.Value = BitConverter.ToChar(new byte[2] { rowLogContents[rowPointer], 0}, 0).ToString();
+                    rowPointer += charCount;
                 }
                 else if (column.Type == "datetime")
                 {
@@ -99,7 +102,7 @@ namespace SqlLogMiner
             //string hexVariableColumnCount = RevertBytes(rowLogContents.Substring(rowPointer, 4));
             short variableColumnCount = BitConverter.ToInt16(rowLogContents, rowPointer);
             rowPointer += 2;
-          
+            int variableColumnPointer = rowPointer + (variableColumnCount*2);
             
             foreach (var column in tableSchema.Columns)
             {
@@ -107,7 +110,8 @@ namespace SqlLogMiner
                 {
                     short variableColumnEnd = BitConverter.ToInt16(rowLogContents, rowPointer);
                     rowPointer += 2;
-                    column.Value = System.Text.Encoding.Default.GetString(rowLogContents,rowPointer,variableColumnEnd - rowPointer);
+                    column.Value = System.Text.Encoding.Default.GetString(rowLogContents, variableColumnPointer, variableColumnEnd - variableColumnPointer);
+                    variableColumnPointer = variableColumnEnd;
                 }
             }
          
@@ -171,6 +175,17 @@ namespace SqlLogMiner
             }
 
             return binaryString;
+        }
+
+        private static string ParseToCharArray(byte[] array)
+        {
+            string charArray = "";
+            foreach (var currentByte in array)
+            {
+                charArray += BitConverter.ToChar(new byte[2] { currentByte, 0 }, 0).ToString();
+            }
+
+            return charArray;
         }
 
         private static byte[] RevertBytes(byte[] byteArray)

@@ -214,6 +214,8 @@ namespace SqlLogMiner
                     tableSchema.Columns.Add(new Column { Type = column.ItemArray[7] + "(" + column.ItemArray[10] + "," + column.ItemArray[12] + ")", ColumnName = column.ItemArray[3].ToString() });
                 else if (column.ItemArray[7].ToString() == "binary")
                     tableSchema.Columns.Add(new Column { Type = column.ItemArray[7] + "(" + column.ItemArray[8] + ")", ColumnName = column.ItemArray[3].ToString() });
+                else if (column.ItemArray[7].ToString() == "char")
+                    tableSchema.Columns.Add(new Column { Type = column.ItemArray[7] + "(" + column.ItemArray[8] + ")", ColumnName = column.ItemArray[3].ToString() });
                 else
                     tableSchema.Columns.Add(new Column { Type = column.ItemArray[7].ToString(), ColumnName = column.ItemArray[3].ToString() });
 
