@@ -122,6 +122,8 @@ namespace SqlLogMiner
         private void OnSelectedRowChanged(object sender, SelectionChangedEventArgs e)
         {
             TransactionLogRow selectedRow = (TransactionLogRow) TransactionLogGrid.SelectedItem;
+            if (selectedRow.Operation == "LOP_MODIFY_ROW")
+                return;
             TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
             TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0,ref selectedTableSchema);
             RowDetailsGrid.ItemsSource = selectedTableSchema.Columns;
@@ -171,6 +173,11 @@ namespace SqlLogMiner
                 }
             }
             return selectedRows.ToArray();
+        }
+
+        private void About(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Proyecto para la clase de Teoria de Base de Datos 2", "Sql Log Miner", MessageBoxButton.OK);
         }
     }
 }

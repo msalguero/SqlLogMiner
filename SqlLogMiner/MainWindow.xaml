@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="SqlLogMiner.MainWindow"
         Title="SQL Log Miner" Height="727" Width="1379.5" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+    </Window.Resources>
     <Grid Margin="0,0,0,-21">
         <Custom:Ribbon HorizontalAlignment="Left" VerticalAlignment="Top" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}">
             <Custom:RibbonTab Header="Home">
@@ -24,8 +27,16 @@
                 </Custom:RibbonGroup>
             </Custom:RibbonTab>
             <Custom:RibbonTab Header="View">
+               <Custom:RibbonGroup>
+                    <Custom:RibbonToggleButton Name="RowDetailToggleButton" IsChecked="True" LargeImageSource="Images\new.png" Label="Row Detail" KeyTip="X" />
+                    <Custom:RibbonToggleButton Name="RedoToggleButton" IsChecked="True" LargeImageSource="Images\open.png" Label="Redo Script" KeyTip="C" />
+                    <Custom:RibbonToggleButton Name="UndoToggleButton" IsChecked="True" LargeImageSource="Images\sessionSettings.png" Label="Undo Script" KeyTip="FP" />
+                </Custom:RibbonGroup>
             </Custom:RibbonTab>
             <Custom:RibbonTab Header="Resources">
+                <Custom:RibbonGroup>
+                    <Custom:RibbonButton Click="About" LargeImageSource="Images\new.png" Label="About" KeyTip="X" />
+                </Custom:RibbonGroup>
             </Custom:RibbonTab>
         </Custom:Ribbon>
         <Border BorderThickness="1" HorizontalAlignment="Left" Height="404" Margin="10,143,0,0" VerticalAlignment="Top" Width="300" BorderBrush="#FFC1B7B7">
@@ -42,7 +53,7 @@
                 <CheckBox Content="Update" IsChecked="True" HorizontalAlignment="Left" Margin="55,242,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
-        <DataGrid SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="OnSelectedRowChanged" Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="1047" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
+        <DataGrid SelectionMode="Single" VerticalGridLinesBrush="White" HorizontalGridLinesBrush="Thistle" CanUserAddRows="False" SelectionUnit="FullRow" SelectionChanged="OnSelectedRowChanged" Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="1047" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Path=RowChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Operation" Binding="{Binding Path=Operation, Mode=TwoWay}"/>
@@ -55,17 +66,17 @@
             </DataGrid.Columns>
         </DataGrid>
         <TabControl HorizontalAlignment="Left" Height="133" Margin="10,552,0,0" VerticalAlignment="Top" Width="1352">
-            <TabItem Header="Row Detail">
+            <TabItem Header="Row Detail" Visibility="{Binding ElementName=RowDetailToggleButton, Path=IsChecked,Converter={StaticResource BooleanToVisibility}}">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-82,-14">
-                    <DataGrid Name="RowDetailsGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="109" Width="1344" Margin="0,0,-78,0"/>
+                    <DataGrid Name="RowDetailsGrid" IsReadOnly="True" VerticalGridLinesBrush="White" HorizontalGridLinesBrush="Thistle" CanUserAddRows="False"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="109" Width="1344" Margin="0,0,-78,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Redo Script" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="80" Margin="-2,-2,-23,0">
+            <TabItem Header="Redo Script"   Visibility="{Binding ElementName=RedoToggleButton, Path=IsChecked,Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="80" Margin="-2,-2,-23,0">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock Name="RedoTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Height="105" Width="1346"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Undo Script" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="85" Margin="-2,-2,-28,0">
+            <TabItem Header="Undo Script" Visibility="{Binding ElementName=UndoToggleButton, Path=IsChecked,Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="85" Margin="-2,-2,-28,0">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock Name="UndoTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Height="105" Width="1346"/>
                 </Grid>
