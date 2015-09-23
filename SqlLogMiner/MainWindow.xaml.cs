@@ -136,7 +136,7 @@ namespace SqlLogMiner
             {
                 TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, transactionLogRow.Object);
                 TransactionLogInterpreter.InterpretRowLogContent(transactionLogRow.RowLogContents0, ref selectedTableSchema);
-                script += TransactionLogInterpreter.RedoScript(selectedTableSchema, transactionLogRow.Operation)+"/n";
+                script += TransactionLogInterpreter.RedoScript(selectedTableSchema, transactionLogRow.Operation)+"\n";
             }
             ScriptViewer scriptViewer = new ScriptViewer(script); 
             scriptViewer.Show();
@@ -149,7 +149,7 @@ namespace SqlLogMiner
             {
                 TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, transactionLogRow.Object);
                 TransactionLogInterpreter.InterpretRowLogContent(transactionLogRow.RowLogContents0, ref selectedTableSchema);
-                script += TransactionLogInterpreter.UndoScript(selectedTableSchema, transactionLogRow.Operation) + "/n";
+                script += TransactionLogInterpreter.UndoScript(selectedTableSchema, transactionLogRow.Operation) + "\n";
             }
             ScriptViewer scriptViewer = new ScriptViewer(script);
             scriptViewer.Show();

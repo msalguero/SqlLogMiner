@@ -44,7 +44,7 @@
         </Border>
         <DataGrid SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="OnSelectedRowChanged" Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="1047" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Binding="{Binding Path=RowChecked, Mode=TwoWay}"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=RowChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="Operation" Binding="{Binding Path=Operation, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Schema" Binding="{Binding Path=Schema, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Object" Binding="{Binding Path=Object, Mode=TwoWay}"/>
