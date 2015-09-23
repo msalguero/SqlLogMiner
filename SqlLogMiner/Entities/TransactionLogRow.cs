@@ -17,5 +17,6 @@ namespace SqlLogMiner.Entities
         public string LSN { get; set; }
         public byte[] RowLogContents0 { get; set; }
         public byte[] RowLogContents1 { get; set; }
+        public bool RowChecked { get; set; }
     }
 }

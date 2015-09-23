@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using SqlLogMiner.Entities;
 using SqlLogMiner.Views.NewConnection;
+using SqlLogMiner.Views.RedoUndo;
 
 namespace SqlLogMiner
 {
@@ -124,27 +125,52 @@ namespace SqlLogMiner
             TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
             TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0,ref selectedTableSchema);
             RowDetailsGrid.ItemsSource = selectedTableSchema.Columns;
+            RedoTextBlock.Text = TransactionLogInterpreter.RedoScript(selectedTableSchema, selectedRow.Operation);
+            UndoTextBlock.Text = TransactionLogInterpreter.UndoScript(selectedTableSchema, selectedRow.Operation);
         }
 
         private void RedoScript(object sender, RoutedEventArgs e)
         {
-            TransactionLogRow selectedRow = (TransactionLogRow)TransactionLogGrid.SelectedItem;
-            TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
-            TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0, ref selectedTableSchema);
-            string text = TransactionLogInterpreter.RedoScript(selectedTableSchema,selectedRow.Operation);
+            var script = "";
+            foreach (var transactionLogRow in GetCheckedRows())
+            {
+                TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, transactionLogRow.Object);
+                TransactionLogInterpreter.InterpretRowLogContent(transactionLogRow.RowLogContents0, ref selectedTableSchema);
+                script += TransactionLogInterpreter.RedoScript(selectedTableSchema, transactionLogRow.Operation)+"/n";
+            }
+            ScriptViewer scriptViewer = new ScriptViewer(script); 
+            scriptViewer.Show();
         }
 
         private void UndoScript(object sender, RoutedEventArgs e)
         {
-            TransactionLogRow selectedRow = (TransactionLogRow)TransactionLogGrid.SelectedItem;
-            TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, selectedRow.Object);
-            TransactionLogInterpreter.InterpretRowLogContent(selectedRow.RowLogContents0, ref selectedTableSchema);
-            string text = TransactionLogInterpreter.UndoScript(selectedTableSchema, selectedRow.Operation);
+            var script = "";
+            foreach (var transactionLogRow in GetCheckedRows())
+            {
+                TableSchema selectedTableSchema = SqlServerManager.GetTableSchema(CurrentSession.Database, transactionLogRow.Object);
+                TransactionLogInterpreter.InterpretRowLogContent(transactionLogRow.RowLogContents0, ref selectedTableSchema);
+                script += TransactionLogInterpreter.UndoScript(selectedTableSchema, transactionLogRow.Operation) + "/n";
+            }
+            ScriptViewer scriptViewer = new ScriptViewer(script);
+            scriptViewer.Show();
         }
 
         private void Refresh(object sender, RoutedEventArgs e)
         {
             GetTransactionLog();
+        }
+
+        private TransactionLogRow[] GetCheckedRows()
+        {
+            List<TransactionLogRow> selectedRows = new List<TransactionLogRow>();
+            foreach (TransactionLogRow item in TransactionLogGrid.ItemsSource)
+            {
+                if (item.RowChecked )
+                {
+                    selectedRows.Add(item);
+                }
+            }
+            return selectedRows.ToArray();
         }
     }
 }

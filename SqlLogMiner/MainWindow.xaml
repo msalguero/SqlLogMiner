@@ -44,7 +44,7 @@
         </Border>
         <DataGrid SelectionMode="Single" SelectionUnit="FullRow" SelectionChanged="OnSelectedRowChanged" Name="TransactionLogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="315,143,0,0" VerticalAlignment="Top" Height="404" Width="1047" Background="White" Foreground="#FF040404" BorderBrush="#FFADB3B9">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=RowChecked, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Operation" Binding="{Binding Path=Operation, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Schema" Binding="{Binding Path=Schema, Mode=TwoWay}"/>
                 <DataGridTextColumn Header="Object" Binding="{Binding Path=Object, Mode=TwoWay}"/>
@@ -61,10 +61,14 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Redo Script" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="80" Margin="-2,-2,-23,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock Name="RedoTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Height="105" Width="1346"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Undo Script" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="85" Margin="-2,-2,-28,0">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock Name="UndoTextBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Height="105" Width="1346"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

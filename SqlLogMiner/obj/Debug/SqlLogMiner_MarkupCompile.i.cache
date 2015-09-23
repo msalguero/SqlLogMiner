@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\manuel\documents\visual studio 2013\Projects\SqlLogMiner\SqlLogMiner\App.xaml
-41544216346
+5242708289
 
-201839095201
+21384935828
 18-1024915309
-MainWindow.xaml;Views\NewConnection\ConnectDatabase.xaml;Views\NewConnection\FilterSetup.xaml;Views\NewConnection\LogSelection.xaml;
+MainWindow.xaml;Views\NewConnection\ConnectDatabase.xaml;Views\NewConnection\FilterSetup.xaml;Views\NewConnection\LogSelection.xaml;Views\RedoUndo\ScriptViewer.xaml;
 
 False
 

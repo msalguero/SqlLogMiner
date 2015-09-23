@@ -86,7 +86,7 @@ namespace SqlLogMiner
                 else if (column.Type.Contains("binary"))
                 {
                     int bitCount = Int32.Parse(column.Type.Split('(')[1].Split(')')[0]);
-                    column.Value = parseToBinary(rowLogContents.SubArray(rowPointer, bitCount));
+                    column.Value = ParseToBinary(rowLogContents.SubArray(rowPointer, bitCount));
                 }
             }
             
@@ -162,7 +162,7 @@ namespace SqlLogMiner
             return script;
         }
 
-        private static string parseToBinary(byte[] array)
+        private static string ParseToBinary(byte[] array)
         {
             string binaryString = "";
             foreach (var currentByte in array)

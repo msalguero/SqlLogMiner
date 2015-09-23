@@ -80,6 +80,9 @@
     <Compile Include="Views\NewConnection\LogSelection.xaml.cs">
       <DependentUpon>LogSelection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RedoUndo\ScriptViewer.xaml.cs">
+      <DependentUpon>ScriptViewer.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewConnection\LogSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RedoUndo\ScriptViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
